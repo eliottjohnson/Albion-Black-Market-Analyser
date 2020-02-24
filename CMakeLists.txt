@@ -12,3 +12,4 @@ include_directories(include)
 file(GLOB SOURCES "src/*.cpp")
 
 add_executable(hack ${SOURCES})
+target_link_libraries(hack curl jsoncpp)

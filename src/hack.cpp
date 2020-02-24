@@ -1,7 +1,6 @@
 #include <iostream>
 #include <fstream>
 #include "dataLoader.h"
-#include "jsonParser.h"
 
 #include <curl/curl.h>
 #include <jsoncpp/json/json.h>
@@ -21,10 +20,14 @@ int main()
   std::cout<<"                                                                                                         "<<std::endl;
 
   dataLoader *dLoader = new dataLoader();
-  jsonParser *jParser = new jsonParser();
   
-  dLoader->LoadData();
-  jParser->ParseData();
+  std::ifstream is("../urls/urls.txt");
+  std::string url;
+  
+  while(getline(is, url)){
+    dLoader->LoadData(url);
+  }
+
 
   return 0;
 }

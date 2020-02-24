@@ -120,7 +120,7 @@ std::cout<<"                                                                    
 			}
 			else
 			{
-				std::cout << "Could not parse HTTP data as JSON" << std::endl;
+				std::cout << "Could not parse HTTP data as JSON" << std::endl;  
 				std::cout << "HTTP data was:\n" << *httpData.get() << std::endl;
 				return 1;
 			}
