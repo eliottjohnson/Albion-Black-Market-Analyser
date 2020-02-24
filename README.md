@@ -3,7 +3,7 @@
 ![AlbionImage](https://www.digiseller.ru/preview/217804/p1_2474427_999643ce.jpg)
 
 ## Requirements:
- - libusb. Installation on Ubuntu:
+ - curl. Installation on Ubuntu:
 ```
  sudo apt install curl
 ```
