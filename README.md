@@ -13,6 +13,7 @@
 ```
 
 ## Installation:
+cd to your folder where you downloaded the file and do:
 ```
 mkdir build
 cd build
@@ -23,7 +24,6 @@ make
 ## Hack
 
 ### How to run:
-A simple command line program exists to provide basic functionality. Please see the the help to get detailed information:
 ```
 TBA
 ```
