@@ -10,6 +10,7 @@
 #include <curl/curl.h>
 #include <jsoncpp/json/json.h>
 
+
 namespace
 {
     std::size_t callback(
@@ -23,6 +24,7 @@ namespace
         return totalBytes;
     }
 }
+
 
 int main()
 {	
