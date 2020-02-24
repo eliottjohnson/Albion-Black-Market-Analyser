@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include "dataLoader.h"
+#include "jsonParser.h"
 
 #include <curl/curl.h>
 #include <jsoncpp/json/json.h>
@@ -13,8 +14,10 @@ int main()
   std::cout<<"\nAlbion\n"<<std::endl;
 
   dataLoader *dLoader = new dataLoader();
+  jsonParser *jParser = new jsonParser();
   
   dLoader->LoadData();
+  jParser->ParseData();
 
   return 0;
 }
