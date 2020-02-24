@@ -24,7 +24,8 @@ make
 ## Hack
 
 ### How to run:
+in the build directory
 ```
-TBA
+./hack
 ```
 
