@@ -1,0 +1,1 @@
+https://www.albion-online-data.com/api/v2/stats/Prices/T5_BAG?locations=Black%20Market

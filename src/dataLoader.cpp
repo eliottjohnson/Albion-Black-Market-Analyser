@@ -6,7 +6,8 @@
 #include <fstream>
 #include <string>
 #include <algorithm>
-#include <jsoncpp/json/json.h>
+#include<unistd.h> //for usleep
+#define _ms 1000 // used for usleep
 #include "dataLoader.h"
 
 namespace
@@ -24,9 +25,8 @@ namespace
 }
 using namespace HACK;
 
-bool dataLoader::LoadData(std::string url){
+bool dataLoader::LoadData(std::string url, Json::Value &jsonData){
   
-  Json::Value jsonData;
 	Json::Reader jsonReader;
 
   std::cout << url << std::endl;
@@ -61,12 +61,12 @@ bool dataLoader::LoadData(std::string url){
   curl_easy_perform(curl);
   curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &httpCode);
   curl_easy_cleanup(curl);
-
+  
   if (httpCode == 200) //CAERLEON DATA
   {
     if (jsonReader.parse(*httpData.get(), jsonData))
     {
-      std::cout << jsonData.toStyledString() << std::endl;
+      //std::cout << jsonData.toStyledString() << std::endl;
       //const std::size_t buy_price_max(jsonData[0]["buy_price_max"].asUInt());
       //const std::string city(jsonData[0]["city"].asString());
       //std::cout <<"Buy Price Max: " << buy_price_max << std::endl;
