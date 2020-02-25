@@ -43,9 +43,6 @@ int main()
     dLoader->LoadData(url,jsonDataCaerleon);
     dLoader->LoadData(url2,jsonDataBlackMarket);
     
-    //std::cout << jsonDataCaerleon.toStyledString() << std::endl;
-    //std::cout << jsonDataBlackMarket.toStyledString() << std::endl;
-    
     for (int i=0; i<jsonDataCaerleon.size(); i++){
       
       
@@ -53,10 +50,12 @@ int main()
       const std::size_t sell_price_min(jsonDataCaerleon[i]["sell_price_min"].asUInt());
       
       int benefit = (buy_price_min-(3*buy_price_min/100))-sell_price_min;
-      if (benefit>1){
+      if (benefit>1000){
         std::cout<<jsonDataCaerleon[i]["item_id"]<<"quality: "<<jsonDataCaerleon[i]["quality"]<<" "<<jsonDataCaerleon[i]["city"]<<"sell price min: "<<jsonDataCaerleon[i]["sell_price_min"]<<std::endl;
         std::cout<<jsonDataBlackMarket[i]["item_id"]<<"quality: "<<jsonDataBlackMarket[i]["quality"]<<" "<<jsonDataBlackMarket[i]["city"]<<" buy price min: "<<jsonDataBlackMarket[i]["buy_price_min"]<<std::endl;
         std::cout<<"Benefit: "<<benefit<<std::endl;
+        //std::cout << jsonDataCaerleon.toStyledString() << std::endl;
+        //std::cout << jsonDataBlackMarket.toStyledString() << std::endl;
       }
       /*
       //if date = "0001-01-01T00:00:00" remove line from both text file
