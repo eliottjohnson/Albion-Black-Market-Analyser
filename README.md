@@ -12,8 +12,20 @@
  sudo apt-get install libjsoncpp-dev
 ```
 
+### Ubuntu VM installation:
+```
+sudo apt-get install libcurl4-openssl-dev
+sudo apt install vim
+sudo apt install cmake
+sudo apt-get update
+sudo apt-get install build-essential
+```
 ## Installation:
-cd to your folder where you downloaded the file and do:
+open the terminal and ls to desktop
+```
+git clone https//username:password@github.com/eliottlerouge/AlbionHacker.git
+```
+cd to AlbionHack and do:
 ```
 mkdir build
 cd build
