@@ -2,8 +2,10 @@
 
 ![AlbionImage](https://www.digiseller.ru/preview/217804/p1_2474427_999643ce.jpg)
 
-## Item list
+## Albion Data Base Project
+https://www.albion-online-data.com/
 https://raw.githubusercontent.com/broderickhyman/ao-bin-dumps/master/formatted/items.txt
+https://www.albion-online-data.com/api/swagger/index.html?urls.primaryName=Albion%20Online%20Data%20API%20v2
 
 ## Requirements:
  - curl. Installation on Ubuntu:
