@@ -2,6 +2,9 @@
 
 ![AlbionImage](https://www.digiseller.ru/preview/217804/p1_2474427_999643ce.jpg)
 
+## Item list
+https://raw.githubusercontent.com/broderickhyman/ao-bin-dumps/master/formatted/items.txt
+
 ## Requirements:
  - curl. Installation on Ubuntu:
 ```
