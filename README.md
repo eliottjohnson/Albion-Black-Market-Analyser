@@ -23,7 +23,7 @@ sudo apt-get install build-essential
 ## Installation:
 open the terminal and ls to desktop
 ```
-git clone https://username:password@github.com/eliottlerouge/AlbionHacker.git
+git clone https://username:password@github.com/eliottlerouge/AlbionHack.git
 ```
 cd to AlbionHack and do:
 ```
