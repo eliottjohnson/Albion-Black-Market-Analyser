@@ -4,7 +4,8 @@
 
 ## Albion Data Base Project
 https://www.albion-online-data.com/
-https://raw.githubusercontent.com/broderickhyman/ao-bin-dumps/master/formatted/items.txt
+
+item list: https://raw.githubusercontent.com/broderickhyman/ao-bin-dumps/master/formatted/items.txt
 https://www.albion-online-data.com/api/swagger/index.html?urls.primaryName=Albion%20Online%20Data%20API%20v2
 
 ## Requirements:
