@@ -17,6 +17,7 @@
 sudo apt-get install libcurl4-openssl-dev
 sudo apt install vim
 sudo apt install cmake
+sudo apt install git
 sudo apt-get update
 sudo apt-get install build-essential
 ```
