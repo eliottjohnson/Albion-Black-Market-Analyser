@@ -29,7 +29,7 @@ bool dataLoader::LoadData(std::string url, Json::Value &jsonData){
   
 	Json::Reader jsonReader;
 
-  std::cout << url << std::endl;
+  //std::cout << url << std::endl;
 
   CURL* curl = curl_easy_init();
 
