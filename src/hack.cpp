@@ -8,30 +8,35 @@
 #include <curl/curl.h>
 #include <jsoncpp/json/json.h>
 #include "datetime_utils.hpp"
+#include <ctime>
 
 using namespace HACK;
 
 int main()
 {
 
-  std::cout<<std::endl;
+  // current date/time based on current system
+  time_t now = time(0);
+  tm *gmtm = gmtime(&now);
 
-std::cout<<" █████╗ ██╗     ██████╗ ██╗ ██████╗ ███╗   ██╗██╗  ██╗ █████╗  ██████╗██╗  ██╗"<<std::endl;
-std::cout<<"██╔══██╗██║     ██╔══██╗██║██╔═══██╗████╗  ██║██║  ██║██╔══██╗██╔════╝██║ ██╔╝"<<std::endl;
-std::cout<<"███████║██║     ██████╔╝██║██║   ██║██╔██╗ ██║███████║███████║██║     █████╔╝ "<<std::endl;
-std::cout<<"██╔══██║██║     ██╔══██╗██║██║   ██║██║╚██╗██║██╔══██║██╔══██║██║     ██╔═██╗ "<<std::endl;
-std::cout<<"██║  ██║███████╗██████╔╝██║╚██████╔╝██║ ╚████║██║  ██║██║  ██║╚██████╗██║  ██╗"<<std::endl;
-std::cout<<"╚═╝  ╚═╝╚══════╝╚═════╝ ╚═╝ ╚═════╝ ╚═╝  ╚═══╝╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝"<<std::endl;
-std::cout<<"                                                              by Eliottlerouge\n"<<std::endl;
+  std::cout<<std::endl;
+  std::cout<<" █████╗ ██╗     ██████╗ ██╗ ██████╗ ███╗   ██╗██╗  ██╗ █████╗  ██████╗██╗  ██╗"<<std::endl;
+  std::cout<<"██╔══██╗██║     ██╔══██╗██║██╔═══██╗████╗  ██║██║  ██║██╔══██╗██╔════╝██║ ██╔╝"<<std::endl;
+  std::cout<<"███████║██║     ██████╔╝██║██║   ██║██╔██╗ ██║███████║███████║██║     █████╔╝ "<<std::endl;
+  std::cout<<"██╔══██║██║     ██╔══██╗██║██║   ██║██║╚██╗██║██╔══██║██╔══██║██║     ██╔═██╗ "<<std::endl;
+  std::cout<<"██║  ██║███████╗██████╔╝██║╚██████╔╝██║ ╚████║██║  ██║██║  ██║╚██████╗██║  ██╗"<<std::endl;
+  std::cout<<"╚═╝  ╚═╝╚══════╝╚═════╝ ╚═╝ ╚═════╝ ╚═╝  ╚═══╝╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝"<<std::endl;
+  std::cout<<gmtm->tm_mday<<"/"<<1 + gmtm->tm_mon<<"/"<<1900 + gmtm->tm_year<<"  UTC: "<<gmtm->tm_hour<<":"<<gmtm->tm_min<<":"<<gmtm->tm_sec
+           <<"                                            by Eliottlerouge\n"<<std::endl;
+
+
 
   dataLoader *dLoader = new dataLoader();
   
-   // Setup the RFC-822 HTTP date-time format handlers
-   dt_utils::datetime dt;
-   dt_utils::datetime_format10 fmt(dt);
+  // Setup the RFC-822 HTTP date-time format handlers
+  dt_utils::datetime dt;
+  dt_utils::datetime_format10 fmt(dt);
   
-  //std::ifstream is("../urls/SelectedUrlsCaerleon.txt");
-  //std::ifstream is2("../urls/SelectedUrlsBlackMarket.txt");
   std::ifstream is("../urls/shortURLsCaerleon.txt");
   std::ifstream is2("../urls/shortURLsBlackMarket.txt");
   
