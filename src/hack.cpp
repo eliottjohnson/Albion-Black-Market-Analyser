@@ -47,12 +47,14 @@ int main()
       
       
       const std::size_t buy_price_min(jsonDataBlackMarket[i]["buy_price_min"].asUInt());
+      const std::string buy_price_min_date(jsonDataBlackMarket[i]["buy_price_min_date"].asString());
       const std::size_t sell_price_min(jsonDataCaerleon[i]["sell_price_min"].asUInt());
+      const std::string sell_price_min_date(jsonDataCaerleon[i]["sell_price_min_date"].asString());
       
       int benefit = (buy_price_min-(3*buy_price_min/100))-sell_price_min;
       if (benefit>1000 && sell_price_min!=0){
-        std::cout<<jsonDataCaerleon[i]["item_id"]<<"quality: "<<jsonDataCaerleon[i]["quality"]<<" "<<jsonDataCaerleon[i]["city"]<<"sell price min: "<<jsonDataCaerleon[i]["sell_price_min"]<<std::endl;
-        std::cout<<jsonDataBlackMarket[i]["item_id"]<<"quality: "<<jsonDataBlackMarket[i]["quality"]<<" "<<jsonDataBlackMarket[i]["city"]<<" buy price min: "<<jsonDataBlackMarket[i]["buy_price_min"]<<std::endl;
+        std::cout<<jsonDataCaerleon[i]["item_id"]<<"quality: "<<jsonDataCaerleon[i]["quality"]<<" "<<jsonDataCaerleon[i]["city"]<<"sell price min: "<<jsonDataCaerleon[i]["sell_price_min"]<<" "<<buy_price_min_date<<std::endl;
+        std::cout<<jsonDataBlackMarket[i]["item_id"]<<"quality: "<<jsonDataBlackMarket[i]["quality"]<<" "<<jsonDataBlackMarket[i]["city"]<<" buy price min: "<<jsonDataBlackMarket[i]["buy_price_min"]<<" "<<sell_price_min_date<<std::endl;
         std::cout<<"Benefit: "<<benefit<<std::endl;
         //std::cout << jsonDataCaerleon.toStyledString() << std::endl;
         //std::cout << jsonDataBlackMarket.toStyledString() << std::endl;
