@@ -25,6 +25,7 @@ sudo apt install cmake
 sudo apt install git
 sudo apt-get update
 sudo apt-get install build-essential
+sudo apt-get install libboost-dev
 ```
 ## Installation:
 open the terminal and ls to desktop
