@@ -9,6 +9,7 @@ class dataLoader{
 public:
 
 		bool LoadData(std::string url, Json::Value &jsonData);
+    
 	
 };
 }
