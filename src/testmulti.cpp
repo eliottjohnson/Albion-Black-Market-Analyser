@@ -7,7 +7,10 @@
 #include <unistd.h>
 #endif
 #include <curl/curl.h>
-
+#include <cstdint>
+#include <memory>
+#include <algorithm>
+#include <jsoncpp/json/json.h>
  
 static const char *urls[] = {
 "https://www.albion-online-data.com/api/v2/stats/Prices/T2_OFF_SHIELD?locations=Caerleon",
@@ -2994,17 +2997,33 @@ static const char *urls[] = {
 };
 
  
-#define MAX_PARALLEL 500
+#define MAX_PARALLEL 500 /* number of simultaneous transfers */
 #define NUM_URLS sizeof(urls)/sizeof(char *)
- 
-static size_t write_cb(char *data, size_t n, size_t l, void *userp)
+
+static size_t write_cb(char *data, size_t size, size_t nmemb, void *userp)
 {
-  /* take care of the data here, ignored in this example */ 
+  /* take care of the data here, ignored in this example */
   (void)data;
   (void)userp;
-  return n*l;
+  Json::Reader jsonReader;
+  Json::Value jsonData;
+  if (jsonReader.parse(data, jsonData))
+    {
+      //std::cout << jsonData.toStyledString() << std::endl;
+      //const std::size_t buy_price_max(jsonData[0]["buy_price_max"].asUInt());
+      //const std::string city(jsonData[0]["city"].asString());
+      //std::cout <<"Buy Price Max: " << buy_price_max << std::endl;
+      //std::cout <<"City: " << city << std::endl;
+    }
+    else
+    {
+      std::cout << "Could not parse HTTP data as JSON" << std::endl;
+      std::cout << "HTTP data was:\n" << data << std::endl;
+      return 1;
+    }
+  return size*nmemb;
 }
- 
+
 static void add_transfer(CURLM *cm, int i)
 {
   CURL *eh = curl_easy_init();
@@ -3013,55 +3032,35 @@ static void add_transfer(CURLM *cm, int i)
   curl_easy_setopt(eh, CURLOPT_PRIVATE, urls[i]);
   curl_multi_add_handle(cm, eh);
 }
- 
+
 int main(void)
 {
-    
-    /*
-    static const char *urls[2981]:
-    //string array[2981]; // creates array to hold names
-    short loop=0; //short for loop for input
-    string line; //this will contain the data read from the file
-    ifstream myfile ("urltestmulti.txt"); //opening the file.
-    if (myfile.is_open()) //if the file is open
-    {
-        while (! myfile.eof() ) //while the end of file is NOT reached
-        {
-            getline (myfile,line); //get one line from the file
-            urls[loop] = line;
-            cout << urls[loop] << endl; //and output it
-            loop++;
-        }
-        myfile.close(); //closing the file
-    }
-    else cout << "Unable to open file"; //if the file is not open output
-  */
-  
   CURLM *cm;
+  std::string readBuffer;
   CURLMsg *msg;
   unsigned int transfers = 0;
   int msgs_left = -1;
   int still_alive = 1;
- 
+
   curl_global_init(CURL_GLOBAL_ALL);
   cm = curl_multi_init();
- 
-  /* Limit the amount of simultaneous connections curl should allow: */ 
+
+  /* Limit the amount of simultaneous connections curl should allow: */
   curl_multi_setopt(cm, CURLMOPT_MAXCONNECTS, (long)MAX_PARALLEL);
- 
+
   for(transfers = 0; transfers < MAX_PARALLEL; transfers++)
     add_transfer(cm, transfers);
- 
+
   do {
     curl_multi_perform(cm, &still_alive);
- 
+
     while((msg = curl_multi_info_read(cm, &msgs_left))) {
       if(msg->msg == CURLMSG_DONE) {
         char *url;
         CURL *e = msg->easy_handle;
         curl_easy_getinfo(msg->easy_handle, CURLINFO_PRIVATE, &url);
         fprintf(stderr, "R: %d - %s <%s>\n",
-                msg->data.result, curl_easy_strerror(msg->data.result), url);
+              msg->data.result, curl_easy_strerror(msg->data.result), url);
         curl_multi_remove_handle(cm, e);
         curl_easy_cleanup(e);
       }
@@ -3073,11 +3072,11 @@ int main(void)
     }
     if(still_alive)
       curl_multi_wait(cm, NULL, 0, 1000, NULL);
- 
+
   } while(still_alive || (transfers < NUM_URLS));
- 
+
   curl_multi_cleanup(cm);
   curl_global_cleanup();
- 
+
   return EXIT_SUCCESS;
 }
