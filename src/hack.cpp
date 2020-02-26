@@ -61,7 +61,7 @@ int main()
        std::string data = buy_price_min_date;
        dt.clear();
        if (strtk::string_to_type_converter(data, fmt))
-       {
+       {/*
           std::cout << "Date-Time: " << data      ;
           std::cout << "Year:   "    << dt.year   ;
           std::cout << "Month:  "    << dt.month  ;
@@ -69,27 +69,21 @@ int main()
           std::cout << "Hour:   "    << dt.hour   ;
           std::cout << "Minute: "    << dt.minute ;
           std::cout << "Second: "    << dt.second ;
+          */
        }
        else{
         std::cout << "Error occured during parsing of date-time: " << data << "\n";
        }
        
       int benefit = (buy_price_min-(3*buy_price_min/100))-sell_price_min;
-      if (benefit>1000 && sell_price_min!=0){
-        std::cout<<jsonDataCaerleon[i]["item_id"]<<" quality: "<<jsonDataCaerleon[i]["quality"]<<" "<<jsonDataCaerleon[i]["city"]<<"sell price min: "<<jsonDataCaerleon[i]["sell_price_min"]<<" "<<buy_price_min_date<<std::endl;
-        std::cout<<jsonDataBlackMarket[i]["item_id"]<<" quality: "<<jsonDataBlackMarket[i]["quality"]<<" "<<jsonDataBlackMarket[i]["city"]<<" buy price min: "<<jsonDataBlackMarket[i]["buy_price_min"]<<" "<<sell_price_min_date<<std::endl;
+      if (benefit>1000 && sell_price_min!=0){ //implement a check time must be less then 1 hour
+        std::cout<<jsonDataCaerleon[i]["item_id"]<<" quality: "<<jsonDataCaerleon[i]["quality"]<<" "<<jsonDataCaerleon[i]["city"]<<"sell price min: "<<jsonDataCaerleon[i]["sell_price_min"]
+                                                            <<" "<<dt.day<<"-"<<dt.month<<" "<<dt.hour<<"h"<<dt.minute<<std::endl;
+        std::cout<<jsonDataBlackMarket[i]["item_id"]<<" quality: "<<jsonDataBlackMarket[i]["quality"]<<" "<<jsonDataBlackMarket[i]["city"]<<" buy price min: "<<jsonDataBlackMarket[i]["buy_price_min"]<<std::endl;
         std::cout<<"  Benefit: "<<benefit<<std::endl;
         //std::cout << jsonDataCaerleon.toStyledString() << std::endl;
         //std::cout << jsonDataBlackMarket.toStyledString() << std::endl;
       }
-      /*
-      //if date = "0001-01-01T00:00:00" remove line from both text file
-      if (jsonDataCaerleon[i]["sell_price_min_date"]!="0001-01-01T00:00:00"){
-        std::cout<<std::endl<<"    "<<url<<" has been added from both files"<<std::endl;
-        tempC << url << std::endl;
-        tempB << url2 << std::endl;
-      }
-      */
     }
   }
 
