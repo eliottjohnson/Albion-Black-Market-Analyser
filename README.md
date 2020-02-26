@@ -3,9 +3,9 @@
 ![AlbionImage](https://www.digiseller.ru/preview/217804/p1_2474427_999643ce.jpg)
 
 ## Albion Data Base Project
-Data Retriever: https://www.albion-online-data.com/
-Item list: https://raw.githubusercontent.com/broderickhyman/ao-bin-dumps/master/formatted/items.txt
-Example curl retrieve: https://www.albion-online-data.com/api/swagger/index.html?urls.primaryName=Albion%20Online%20Data%20API%20v2
+- Data Retriever: https://www.albion-online-data.com/
+- Item list: https://raw.githubusercontent.com/broderickhyman/ao-bin-dumps/master/formatted/items.txt
+- Example curl retrieve: https://www.albion-online-data.com/api/swagger/index.html?urls.primaryName=Albion%20Online%20Data%20API%20v2
 
 ## Requirements:
  - curl. Installation on Ubuntu:
