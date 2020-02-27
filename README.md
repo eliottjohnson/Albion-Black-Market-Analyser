@@ -26,6 +26,7 @@ sudo apt install git
 sudo apt-get update
 sudo apt-get install build-essential
 sudo apt-get install libboost-dev
+sudo apt-get install libjsoncpp-dev
 ```
 ## Installation:
 open the terminal and ls to desktop
