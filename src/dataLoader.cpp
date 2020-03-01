@@ -9,6 +9,7 @@
 #include<unistd.h> //for usleep
 #define _ms 1000 // used for usleep
 #include "dataLoader.h"
+#include "datetime_utils.hpp"
 
 static const char *urls[] = {
 "https://www.albion-online-data.com/api/v2/stats/Prices/T2_OFF_SHIELD?locations=Caerleon,Black%20Market",
@@ -3032,20 +3033,30 @@ size_t dataLoader::write_cb(char *data, size_t size, size_t nmemb, void *userp)
           const std::string buy_price_min_date(jsonData[i]["buy_price_min_date"].asString());
           const std::size_t sell_price_min(jsonData[i+5]["sell_price_min"].asUInt());
           const std::string sell_price_min_date(jsonData[i+5]["sell_price_min_date"].asString());
+
+          dt_utils::datetime dtCaerleon;
+          dt_utils::datetime_format10 fmtCaerleon(dtCaerleon);
+          dt_utils::datetime dtBlackMarket;
+          dt_utils::datetime_format10 fmtBlackMarket(dtBlackMarket);
           
-          char BMtime_array[buy_price_min_date.length() + 1];
-          std::strcpy(BMtime_array, buy_price_min_date.c_str()); 
-          char Ctime_array[sell_price_min_date.length() + 1];
-          std::strcpy(Ctime_array, sell_price_min_date.c_str());
+          dtCaerleon.clear();
+          strtk::string_to_type_converter(sell_price_min_date, fmtCaerleon);
+          dtBlackMarket.clear();
+          strtk::string_to_type_converter(buy_price_min_date, fmtBlackMarket);
+
 
           int benefit = (buy_price_min-(3*buy_price_min/100))-sell_price_min;
           if (benefit>10000 && sell_price_min!=0){
-            if (BMtime_array[5]==Ctime_array[5] && BMtime_array[6]==Ctime_array[6] && BMtime_array[8]==Ctime_array[8] && BMtime_array[9]==Ctime_array[9]){ //TODO implement time check
-              //std::cout << jsonData[i].toStyledString() << std::endl;
-              //std::cout << jsonData[i+5].toStyledString() << std::endl;
+            if (dtCaerleon.day==gmtm->tm_mday && dtCaerleon.month==1 + gmtm->tm_mon && dtBlackMarket.day==gmtm->tm_mday && dtBlackMarket.month==1 + gmtm->tm_mon
+                && gmtm->tm_hour==dtCaerleon.hour && gmtm->tm_hour==dtBlackMarket.hour){
+                  
+              
               //TODO implement cleaner structure
-              std::cout<<jsonData[i+5]["city"]<<" Sell price min: "<<jsonData[i+5]["sell_price_min"]<<" Quality: "<<jsonData[i+5]["quality"]<<" "<<sell_price_min_date<<" Item ID: "<<jsonData[i+5]["item_id"]<<std::endl;
-              std::cout<<jsonData[i]["city"]<<" Buy price min: "<<jsonData[i]["buy_price_min"]<<" Quality: "<<jsonData[i+5]["quality"]<<" "<<buy_price_min_date<<std::endl;
+              std::cout<<jsonData[i+5]["city"]<<" Sell price min: "<<jsonData[i+5]["sell_price_min"]
+                                                              <<" "<<dtCaerleon.day<<"-"<<dtCaerleon.month<<" "<<dtCaerleon.hour<<"h"<<dtCaerleon.minute
+                                                              <<"   "<<jsonData[i+5]["item_id"]<<" quality: "<<jsonData[i+5]["quality"]<<std::endl;
+              std::cout<<jsonData[i]["city"]<<" Buy price min: "<<jsonData[i]["buy_price_min"]<<" Quality: "<<jsonData[i+5]["quality"]<<" "<<buy_price_min_date
+                                                              <<" "<<dtBlackMarket.day<<"-"<<dtBlackMarket.month<<" "<<dtBlackMarket.hour<<"h"<<dtBlackMarket.minute<<std::endl;
               std::cout<<std::string(23,' ')+"Benefit: "<<benefit<<std::endl;
             }
           } 
