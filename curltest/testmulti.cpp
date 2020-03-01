@@ -3009,7 +3009,7 @@ static size_t write_cb(char *data, size_t size, size_t nmemb, void *userp)
   Json::Value jsonData;
   if (jsonReader.parse(data, jsonData))
     {
-      //std::cout << jsonData.toStyledString() << std::endl;
+      std::cout << jsonData.toStyledString() << std::endl;
       //const std::size_t buy_price_max(jsonData[0]["buy_price_max"].asUInt());
       //const std::string city(jsonData[0]["city"].asString());
       //std::cout <<"Buy Price Max: " << buy_price_max << std::endl;
@@ -3059,8 +3059,8 @@ int main(void)
         char *url;
         CURL *e = msg->easy_handle;
         curl_easy_getinfo(msg->easy_handle, CURLINFO_PRIVATE, &url);
-        fprintf(stderr, "R: %d - %s <%s>\n",
-              msg->data.result, curl_easy_strerror(msg->data.result), url);
+        //fprintf(stderr, "R: %d - %s <%s>\n",
+              //msg->data.result, curl_easy_strerror(msg->data.result), url);
         curl_multi_remove_handle(cm, e);
         curl_easy_cleanup(e);
       }

@@ -7,8 +7,9 @@
 #define _ms 1000 // used for usleep
 #include <curl/curl.h>
 #include <jsoncpp/json/json.h>
-#include "datetime_utils.hpp"
 #include <ctime>
+
+
 
 using namespace HACK;
 
@@ -27,29 +28,22 @@ int main()
   std::cout<<"██║  ██║███████╗██████╔╝██║╚██████╔╝██║ ╚████║██║  ██║██║  ██║╚██████╗██║  ██╗"<<std::endl;
   std::cout<<"╚═╝  ╚═╝╚══════╝╚═════╝ ╚═╝ ╚═════╝ ╚═╝  ╚═══╝╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝"<<std::endl;
   std::cout<<gmtm->tm_mday<<"/"<<1 + gmtm->tm_mon<<"/"<<1900 + gmtm->tm_year<<"  UTC: "<<gmtm->tm_hour<<":"<<gmtm->tm_min<<":"<<gmtm->tm_sec
-           <<"                                            by Eliottlerouge\n"<<std::endl;
+           <<"                                       by Eliottlerouge\n"<<std::endl;
 
 
 
   dataLoader *dLoader = new dataLoader();
   
-  // Setup the RFC-822 HTTP date-time format handlers
-  dt_utils::datetime dtCaerleon;
-  dt_utils::datetime_format10 fmtCaerleon(dtCaerleon);
-  dt_utils::datetime dtBlackMarket;
-  dt_utils::datetime_format10 fmtBlackMarket(dtBlackMarket);
+  dLoader->multiLoad();
   
+  /*
   std::ifstream is("../urls/shortURLsCaerleon.txt");
   std::ifstream is2("../urls/shortURLsBlackMarket.txt");
-  
   std::ofstream tempC,tempB;
   tempC.open("shortURLsCaerleon.txt");
   tempB.open("shortURLsBlackMarket.txt");
-  
   int counter=0;
-  
   std::string url,url2;
-
   Json::Value jsonDataCaerleon;
   Json::Value jsonDataBlackMarket;
   
@@ -65,7 +59,7 @@ int main()
       const std::string sell_price_min_date(jsonDataCaerleon[i]["sell_price_min_date"].asString());
       
       int benefit = (buy_price_min-(3*buy_price_min/100))-sell_price_min;
-      if (benefit>1000 && sell_price_min!=0){
+      if (benefit>5000 && sell_price_min!=0){
         
         std::string dataCaerleon = buy_price_min_date;
         dtCaerleon.clear();
@@ -91,5 +85,6 @@ int main()
     std::cout<<"Searching: "<<counter<<"/2981 "<<url<<"\r"<<std::flush;
   }
   std::cout<<std::endl;
+  */
   return 0;
 }
