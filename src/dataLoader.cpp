@@ -3050,14 +3050,12 @@ size_t dataLoader::write_cb(char *data, size_t size, size_t nmemb, void *userp)
             if (dtCaerleon.day==gmtm->tm_mday && dtCaerleon.month==1 + gmtm->tm_mon && dtBlackMarket.day==gmtm->tm_mday && dtBlackMarket.month==1 + gmtm->tm_mon
                 && gmtm->tm_hour==dtCaerleon.hour && gmtm->tm_hour==dtBlackMarket.hour){
                   
-              
-              //TODO implement cleaner structure
-              std::cout<<jsonData[i+5]["city"]<<" Sell price min: "<<jsonData[i+5]["sell_price_min"]
-                                                              <<" "<<dtCaerleon.day<<"-"<<dtCaerleon.month<<" "<<dtCaerleon.hour<<"h"<<dtCaerleon.minute
+              std::cout<<jsonData[i+5]["city"]<<"     Sell price min: "<<jsonData[i+5]["sell_price_min"]
+                                                              <<" "<<dtCaerleon.hour<<"h"<<dtCaerleon.minute
                                                               <<"   "<<jsonData[i+5]["item_id"]<<" quality: "<<jsonData[i+5]["quality"]<<std::endl;
-              std::cout<<jsonData[i]["city"]<<" Buy price min: "<<jsonData[i]["buy_price_min"]<<" Quality: "<<jsonData[i+5]["quality"]<<" "<<buy_price_min_date
-                                                              <<" "<<dtBlackMarket.day<<"-"<<dtBlackMarket.month<<" "<<dtBlackMarket.hour<<"h"<<dtBlackMarket.minute<<std::endl;
-              std::cout<<std::string(23,' ')+"Benefit: "<<benefit<<std::endl;
+              std::cout<<jsonData[i]["city"]<<"  Buy price min: "<<jsonData[i]["buy_price_min"]
+                                                              <<" "<<dtBlackMarket.hour<<"h"<<dtBlackMarket.minute<<std::endl;
+              std::cout<<std::string(22,' ')+"Benefit: "<<benefit<<std::endl;
             }
           } 
           
@@ -3130,7 +3128,7 @@ int dataLoader::multiLoad()
 
   curl_multi_cleanup(cm);
   curl_global_cleanup();
-
+  std::cout<<"End of Multi Load"<<std::endl;
   return EXIT_SUCCESS;
 }
 
