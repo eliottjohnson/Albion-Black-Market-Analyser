@@ -36,7 +36,7 @@ int main()
   
   while (true){
   dLoader->multiLoad();
-  usleep(120*_s); //refresh every x seconds
+  usleep(30*_s); //refresh every x seconds
   std::cout<<"REFRESH"<<std::endl;
   
   }

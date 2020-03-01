@@ -3046,7 +3046,7 @@ size_t dataLoader::write_cb(char *data, size_t size, size_t nmemb, void *userp)
 
 
           int benefit = (buy_price_min-(3*buy_price_min/100))-sell_price_min;
-          if (benefit>10000 && sell_price_min!=0){
+          if (benefit>5000 && sell_price_min!=0){
             if (dtCaerleon.day==gmtm->tm_mday && dtCaerleon.month==1 + gmtm->tm_mon && dtBlackMarket.day==gmtm->tm_mday && dtBlackMarket.month==1 + gmtm->tm_mon
                 && gmtm->tm_hour==dtCaerleon.hour && gmtm->tm_hour==dtBlackMarket.hour){
                   
