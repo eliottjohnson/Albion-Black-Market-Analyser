@@ -1,4 +1,4 @@
-# AlbionHack
+# Albion Black Market Analyser
 
 ![AlbionImage](https://www.digiseller.ru/preview/217804/p1_2474427_999643ce.jpg)
 
